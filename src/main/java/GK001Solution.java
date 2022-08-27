@@ -60,15 +60,15 @@ public class GK001Solution {
 
     public static void main(String[] args) {
         // Declare integer 'T' (Number of Test Cases)
-        int T;
+        int testcases;
 
         // & read it from Standard Input
-        T = inputObject.nextInt();
+        testcases = inputObject.nextInt();
 
         // Loop through the number of Test Cases [1, T]
-        for (int test_case = 1; test_case <= T; ++test_case) {
+        for (int i = 1; i <= testcases; ++i) {
             // Print the Test Case Number to Standard Output
-            System.out.print("Case #" + test_case + ": ");
+            System.out.print("Case #" + i + ": ");
 
             // Call the 'solve()' function to answer each test
             solve();

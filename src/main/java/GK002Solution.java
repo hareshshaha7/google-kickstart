@@ -62,29 +62,43 @@ import java.util.*;
 public class GK002Solution {
 
     public static int numberOfRecordBreakingDays(int numberOfDays, int[] visitors) {
-        int recordBreakingDays = 0;
+        int recordBreakingDays = visitors[0] > visitors[1] ? 1 : 0;
+        int highestRecord = visitors[0];
 
-        // TODO: implement logic to calculate the number of record-breaking days
+        for (int i = 1; i < numberOfDays - 1; i++) {
+            if (visitors[i] > highestRecord && visitors[i] > visitors[i + 1]) {
+                recordBreakingDays++;
+                highestRecord = Math.max(visitors[i], highestRecord);
+            }
+        }
+
+        recordBreakingDays = visitors[numberOfDays - 1] > highestRecord ? recordBreakingDays + 1 : recordBreakingDays;
 
         return recordBreakingDays;
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+
         // Get number of test cases in input
-        int testCaseCount = scanner.nextInt();
+        int testCaseCount = sc.nextInt();
+
         // Iterate through test cases
-        for (int tc = 1; tc <= testCaseCount; ++tc) {
+        for (int i = 1; i <= testCaseCount; ++i) {
             // Get number of days for this test case
-            int numberOfDays = scanner.nextInt();
+            int numberOfDays = sc.nextInt();
+
             // Get attendance for each day
             int[] visitorsPerDay = new int[numberOfDays];
             for (int d = 0; d < numberOfDays; ++d) {
-                visitorsPerDay[d] = scanner.nextInt();
+                visitorsPerDay[d] = sc.nextInt();
             }
+
             // Print results
-            int answer = numberOfRecordBreakingDays(numberOfDays, visitorsPerDay);
-            System.out.println("Case #" + tc + ": " + answer);
+            int answer = numberOfDays > 1 ? numberOfRecordBreakingDays(numberOfDays, visitorsPerDay) : numberOfDays;
+            System.out.println("Case #" + i + ": " + answer);
         }
+
+        sc.close();
     }
 }
